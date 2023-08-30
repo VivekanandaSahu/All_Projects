@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Calculator</title>
+    <style>
+      .container {
+        width: 320px;
+        height: 550px;
+        background-color: rgb(42, 39, 39);
+        border-radius: 9px;
+      }
+      .screen {
+        width: 290px;
+        height: 150px;
+        background-color: rgb(97, 94, 94);
+        position: relative;
+        top: 15px;
+        left: 15px;
+        border-radius: 3px;
+        box-shadow: 0px 0px 10px rgb(82, 78, 78);
+        font-size: 40px;
+        color: rgb(17, 18, 18);
+        text-shadow: 1px 1px 5px rgb(217, 209, 209);
+        text-align: left; /* Adjust the text alignment */
+        line-height: 234px;
+      }
+      #span {
+        display: block;
+
+        position: relative;
+        top: 9px;
+        width: 284px;
+        height: 22px;
+        /* border: 2px solid red; */
+        margin: auto;
+        font-size: 20px;
+        color: rgb(17, 18, 18);
+        text-shadow: 1px 1px 5px rgb(217, 209, 209);
+      }
+      .nos {
+        width: 290px;
+        height: 341px;
+        background-color: rgb(97, 91, 91);
+        position: relative;
+        top: 30px;
+        left: 15px;
+        border-radius: 4px;
+        box-shadow: 0px 0px 5px rgb(7, 7, 7);
+      }
+      /* .no{
+            font-size: 30px;
+            border: 2px solid ;
+            border-radius: 27%;
+        } */
+      .switches {
+        position: relative;
+        left: 9px;
+      }
+      button:hover {
+        box-shadow: 1px 1px 5px rgb(103, 101, 101);
+        background-color: rgb(128, 125, 125);
+      }
+      button:active {
+        background-color: rgb(181, 181, 181);
+      }
+      button {
+        border: 2px solid rgb(46, 46, 46);
+        border-radius: 27%;
+        width: 47px;
+        height: 47px;
+      }
+      .nos:hover {
+        background-color: rgb(81, 79, 79);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="span"></div>
+      <div class="screen"></div>
+      <div class="nos">
+        <div class="switches">
+          <table cellspacing="4" cellpadding="8">
+            <tr>
+              <td class="no" onclick="clearscreen()"><button>AC</button></td>
+              <td class="no"><button>()</button></td>
+              <td class="no" onclick="appendtoscreen('%')">
+                <button>%</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('/')">
+                <button>/</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="no" onclick="appendtoscreen('7')">
+                <button>7</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('8')">
+                <button>8</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('9')">
+                <button>9</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('*')">
+                <button>*</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="no" onclick="appendtoscreen('4')">
+                <button>4</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('5')">
+                <button>5</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('6')">
+                <button>6</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('-')">
+                <button>-</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="no" onclick="appendtoscreen('1')">
+                <button>1</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('2')">
+                <button>2</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('3')">
+                <button>3</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('+')">
+                <button>+</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="no" onclick="appendtoscreen('0')">
+                <button>0</button>
+              </td>
+              <td class="no" onclick="appendtoscreen('.')">
+                <button>.</button>
+              </td>
+              <td class="no" onclick="removeLastCharacter()">
+                <button>&lt;</button>
+              </td>
+              <td class="no" onclick="calculateResult()"><button>=</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let name = prompt("Enter Your Name:", "GUEST");
+      document.getElementById("span").innerText = `Welcome${name}`;
+      const screen = document.querySelector(".screen");
+      function appendtoscreen(value) {
+        // screen.innerHTML += value;
+        screen.textContent += value;
+      }
+
+      function removeLastCharacter() {
+        screen.textContent = screen.textContent.slice(0, -1);
+      }
+
+      function clearscreen() {
+        screen.textContent = "";
+      }
+
+      function calculateResult() {
+        try {
+          const result = eval(screen.textContent);
+          screen.textContent = result;
+        } catch (error) {
+          screen.textContent = "Error";
+        }
+      }
+    </script>
+  </body>
+</html>
